@@ -27,6 +27,11 @@ public class UserController {
         return fakeDbCall();
     }
 
+    @GetMapping("/db")
+    public Object getUsers(){
+        return userService.getAll();
+    }
+
     private List<User> fakeDbCall(){
 
         List<User> userList = new ArrayList<>();
