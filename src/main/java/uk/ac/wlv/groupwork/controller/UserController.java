@@ -24,12 +24,12 @@ public class UserController {
 
     @GetMapping
     public Object get(){
-        return fakeDbCall();
+        return (List<User>) userService.getAll();
     }
 
-    @GetMapping("/db")
-    public Object getUsers(){
-        return userService.getAll();
+    @GetMapping("/fake")
+    public List<User> getUsers(){
+        return fakeDbCall();
     }
 
     private List<User> fakeDbCall(){

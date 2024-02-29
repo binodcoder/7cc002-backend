@@ -15,12 +15,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Object getAll(){
+    public List<User> getAll(){
         if(userRepository.findAll().isEmpty()){
             //return (new HashMap<String, String>()).put("Error", "No Data");
-            Map<String, String> errorMessage = new HashMap<>();
-            errorMessage.put("ERROR", "NO DATA");
-            return errorMessage;
+//            Map<String, String> errorMessage = new HashMap<>();
+//            errorMessage.put("ERROR", "NO DATA");
+//            return errorMessage;
+            return null;
         } else {
             return userRepository.findAll();
         }
