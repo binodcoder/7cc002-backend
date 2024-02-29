@@ -9,7 +9,7 @@ import uk.ac.wlv.groupwork.service.UserService;
 
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
