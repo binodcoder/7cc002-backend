@@ -8,15 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
 @SpringBootApplication
 public class GroupworkApplication extends SpringBootServletInitializer {
-
-    @RequestMapping("/")
-    @ResponseBody
-    String home(){
-        return "Helloooo";
-    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
