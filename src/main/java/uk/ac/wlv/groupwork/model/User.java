@@ -2,8 +2,10 @@ package uk.ac.wlv.groupwork.model;
 
 import javax.persistence.*;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
