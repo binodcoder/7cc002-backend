@@ -1,31 +1,28 @@
 package uk.ac.wlv.groupwork.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.ac.wlv.groupwork.dao.CoachRepository;
 import uk.ac.wlv.groupwork.dao.UserRepository;
-import uk.ac.wlv.groupwork.model.User;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserService {
+public class CoachService {
+    private final CoachRepository coachRepository;
 
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CoachService(CoachRepository coachRepository) {
+        this.coachRepository = coachRepository;
     }
 
     public Object getAll(){
         try {
-            if(userRepository.findAll().isEmpty()){
+            if(coachRepository.findAll().isEmpty()){
                 Map<String, String> errorMessage = new HashMap<>();
                 errorMessage.put("EMPTY", "NO DATA");
                 return errorMessage;
             } else {
-                return userRepository.findAll();
+                return coachRepository.findAll();
             }
         } catch (Exception e)
         {
