@@ -13,6 +13,7 @@ public class CoachController {
     private final CoachService coachService;
 
     public CoachController(CoachService coachService) {
+
         this.coachService = coachService;
     }
 
