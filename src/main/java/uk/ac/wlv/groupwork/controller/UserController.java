@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping
     public Object get(){
-        return (List<User>) userService.getAll();
+        return userService.getAll();
     }
 
     @GetMapping("/fake")

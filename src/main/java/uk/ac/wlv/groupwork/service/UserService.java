@@ -12,18 +12,26 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public List<User> getAll(){
-        if(userRepository.findAll().isEmpty()){
-            //return (new HashMap<String, String>()).put("Error", "No Data");
-//            Map<String, String> errorMessage = new HashMap<>();
-//            errorMessage.put("ERROR", "NO DATA");
-//            return errorMessage;
-            return null;
-        } else {
-            return userRepository.findAll();
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public Object getAll(){
+        try {
+            if(userRepository.findAll().isEmpty()){
+                Map<String, String> errorMessage = new HashMap<>();
+                errorMessage.put("ERROR", "NO DATA");
+                return errorMessage;
+            } else {
+                return userRepository.findAll();
+            }
+        } catch (Exception e)
+        {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("DB ERROR", "ERROR "+e.getMessage()+" ");
+            return errorMessage;
         }
     }
 }

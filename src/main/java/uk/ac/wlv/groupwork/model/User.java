@@ -2,7 +2,7 @@ package uk.ac.wlv.groupwork.model;
 
 import javax.persistence.*;
 
-@Entity(name = "tbl_user")
+@Entity(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
