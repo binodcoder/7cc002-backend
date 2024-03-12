@@ -1,9 +1,7 @@
 package uk.ac.wlv.groupwork.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import uk.ac.wlv.groupwork.model.User;
 import uk.ac.wlv.groupwork.service.UserService;
 
@@ -22,10 +20,31 @@ public class UserController {
     }
 
     @GetMapping
-    public Object get(){
+    public ResponseEntity<Object> getAllUsers() {
         return userService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUserById(@PathVariable int id) {
+        return userService.getUserById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
+
+    @PutMapping
+    public ResponseEntity<Object> updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteUserById(@PathVariable int id) {
+        return userService.deleteUserById(id);
+    }
+
+    //FAKE DATABASE for testing purposes.
     @GetMapping("/fake")
     public List<User> getUsers(){
         return fakeDbCall();
