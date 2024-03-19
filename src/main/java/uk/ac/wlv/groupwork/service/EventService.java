@@ -1,5 +1,6 @@
 package uk.ac.wlv.groupwork.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.wlv.groupwork.dao.EventRepository;
 import uk.ac.wlv.groupwork.model.Event;
@@ -7,6 +8,7 @@ import uk.ac.wlv.groupwork.model.Event;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -17,22 +19,23 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Object getAllEvents() {
-        try {
-            List<Event> events = eventRepository.findAll();
-            if (events.isEmpty()) {
-                Map<String, String> errorMessage = new HashMap<>();
-                errorMessage.put("EMPTY", "No Data");
-                return errorMessage;
-            } else {
-                return events;
-            }
-        } catch (Exception e) {
-            Map<String, String> errorMessage = new HashMap<>();
-            errorMessage.put("ERROR", "Database error: " + e.getMessage());
-            return errorMessage;
-        }
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
-}
+    public Optional<Event> getEventById(int id) {
+        return eventRepository.findById(id);
+    }
 
+    public Event addEvent(Event event) {
+        return eventRepository.save(event);
+    }
+
+    public Event updateEvent(Event event) {
+        return eventRepository.save(event);
+    }
+
+    public void deleteEventById(int id) {
+        eventRepository.deleteById(id);
+    }
+}

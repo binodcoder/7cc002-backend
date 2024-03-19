@@ -8,32 +8,34 @@ import uk.ac.wlv.groupwork.model.ActivityContent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ActivityContentService {
 
     private final ActivityContentRepository activityContentRepository;
 
-    @Autowired
     public ActivityContentService(ActivityContentRepository activityContentRepository) {
         this.activityContentRepository = activityContentRepository;
     }
 
-    public Object getAll() {
-        try {
-            List<ActivityContent> activityContents = activityContentRepository.findAll();
-            if (activityContents.isEmpty()) {
-                Map<String, String> errorMessage = new HashMap<>();
-                errorMessage.put("ERROR", "NO DATA");
-                return errorMessage;
-            } else {
-                return activityContents;
-            }
-        } catch (Exception e) {
-            Map<String, String> errorMessage = new HashMap<>();
-            errorMessage.put("DB ERROR", "ERROR " + e.getMessage() + " ");
-            return errorMessage;
-        }
+    public List<ActivityContent> getAllActivityContents() {
+        return activityContentRepository.findAll();
+    }
+
+    public Optional<ActivityContent> getActivityContentById(int id) {
+        return activityContentRepository.findById(id);
+    }
+
+    public ActivityContent addActivityContent(ActivityContent activityContent) {
+        return activityContentRepository.save(activityContent);
+    }
+
+    public ActivityContent updateActivityContent(ActivityContent activityContent) {
+        return activityContentRepository.save(activityContent);
+    }
+
+    public void deleteActivityContentById(int id) {
+        activityContentRepository.deleteById(id);
     }
 }
-

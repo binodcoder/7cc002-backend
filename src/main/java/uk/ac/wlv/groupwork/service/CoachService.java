@@ -2,33 +2,39 @@ package uk.ac.wlv.groupwork.service;
 
 import org.springframework.stereotype.Service;
 import uk.ac.wlv.groupwork.dao.CoachRepository;
-import uk.ac.wlv.groupwork.dao.UserRepository;
+import uk.ac.wlv.groupwork.model.Coach;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CoachService {
+
     private final CoachRepository coachRepository;
 
     public CoachService(CoachRepository coachRepository) {
         this.coachRepository = coachRepository;
     }
 
-    public Object getAll(){
-        try {
-            if(coachRepository.findAll().isEmpty()){
-                Map<String, String> errorMessage = new HashMap<>();
-                errorMessage.put("EMPTY", "NO DATA");
-                return errorMessage;
-            } else {
-                return coachRepository.findAll();
-            }
-        } catch (Exception e)
-        {
-            Map<String, String> errorMessage = new HashMap<>();
-            errorMessage.put("DB ERROR", "ERROR "+e.getMessage()+" ");
-            return errorMessage;
-        }
+    public List<Coach> getAllCoaches() {
+        return coachRepository.findAll();
+    }
+
+    public Optional<Coach> getCoachById(int id) {
+        return coachRepository.findById(id);
+    }
+
+    public Coach addCoach(Coach coach) {
+        return coachRepository.save(coach);
+    }
+
+    public Coach updateCoach(Coach coach) {
+        return coachRepository.save(coach);
+    }
+
+    public void deleteCoachById(int id) {
+        coachRepository.deleteById(id);
     }
 }

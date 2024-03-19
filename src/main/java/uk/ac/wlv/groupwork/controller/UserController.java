@@ -1,13 +1,17 @@
 package uk.ac.wlv.groupwork.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.wlv.groupwork.model.User;
+import uk.ac.wlv.groupwork.service.PasswordEncoder;
 import uk.ac.wlv.groupwork.service.UserService;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -19,49 +23,70 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody User loginUser) {
+        User user = userService.login(loginUser.getEmail(), loginUser.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+    }
+
     @GetMapping
     public ResponseEntity<Object> getAllUsers() {
-        return userService.getAll();
+        List<User> users = userService.getAllUsers();
+        if (users.isEmpty()) {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("ERROR", "NO DATA");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        } else {
+            return ResponseEntity.ok(users);
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+        Optional<User> user = userService.getUserById(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        } else {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("NOT FOUND", "User with ID " + id + " not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
     }
 
     @PostMapping
     public ResponseEntity<Object> addUser(@RequestBody User user) {
-        return userService.addUser(user);
+        user.setPassword(PasswordEncoder.encode(user.getPassword()));
+
+        User addedUser = userService.addUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedUser);
     }
 
-    @PutMapping
-    public ResponseEntity<Object> updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable int id, @RequestBody User user) {
+        if (!userService.getUserById(id).isPresent()) {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("NOT FOUND", "User with ID " + id + " not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+        user.setId(id);
+        user.setPassword(PasswordEncoder.encode(user.getPassword()));
+
+        User updatedUser = userService.updateUser(user);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUserById(@PathVariable int id) {
-        return userService.deleteUserById(id);
+        if (!userService.getUserById(id).isPresent()) {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("NOT FOUND", "User with ID " + id + " not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
     }
-
-    //FAKE DATABASE for testing purposes.
-    @GetMapping("/fake")
-    public List<User> getUsers(){
-        return fakeDbCall();
-    }
-
-    private List<User> fakeDbCall(){
-
-        List<User> userList = new ArrayList<>();
-
-        userList.add(new User(1,"sahan@bcas.lk", "sahan", "123", "USER", 33));
-        userList.add(new User(2,"sam@gmail.com", "Sammy", "455", "ADMIN", 22));
-        userList.add(new User(3,"anne@yahoo.com", "Anne", "789", "STAFF", 33));
-        userList.add(new User(4,"ron@gmail.com", "Ronald", "455", "STAFF",22));
-        userList.add(new User(5,"will@yahoo.com", "William", "123", "USER", 22));
-
-        return userList;
-    }
-
 }
-

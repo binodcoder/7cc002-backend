@@ -6,5 +6,5 @@ import uk.ac.wlv.groupwork.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
-
+    User findByEmailAndPassword(String email, String password);
 }
