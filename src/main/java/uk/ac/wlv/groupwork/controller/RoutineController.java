@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/routine")
+@RequestMapping("/routines")
 public class RoutineController {
 
     private final RoutineService routineService;
