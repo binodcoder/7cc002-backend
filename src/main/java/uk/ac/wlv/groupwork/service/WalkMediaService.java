@@ -1,6 +1,5 @@
 package uk.ac.wlv.groupwork.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.wlv.groupwork.dao.WalkMediaRepository;
 import uk.ac.wlv.groupwork.model.WalkMedia;
