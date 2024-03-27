@@ -1,5 +1,7 @@
 package uk.ac.wlv.groupwork.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -16,6 +18,7 @@ public class LiveTraining {
     private String title;
     private String description;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date trainingDate;
 
