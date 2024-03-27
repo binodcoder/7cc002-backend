@@ -45,6 +45,22 @@ public class UserController {
         }
     }
 
+    /**
+     * Sync endpoint for frontend developer's request
+     * @return List of trainers for now
+     */
+    @GetMapping("/sync")
+    public ResponseEntity<Object> getAllTrainers() {
+        List<User> trainers = userService.getAllTrainers();
+        if (trainers.isEmpty()) {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("ERROR", "NO DATA FOUND");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        } else {
+            return ResponseEntity.ok(trainers);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUserById(@PathVariable int id) {
         Optional<User> user = userService.getUserById(id);

@@ -2,6 +2,7 @@ package uk.ac.wlv.groupwork.service;
 
 import org.springframework.stereotype.Service;
 import uk.ac.wlv.groupwork.dao.UserRepository;
+import uk.ac.wlv.groupwork.model.Role;
 import uk.ac.wlv.groupwork.model.User;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,10 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public List<User> getAllTrainers() {
+        return userRepository.findByRole(Role.trainer);
     }
 
     public Optional<User> getUserById(int id) {
