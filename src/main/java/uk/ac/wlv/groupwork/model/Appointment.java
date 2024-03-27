@@ -23,9 +23,11 @@ public class Appointment {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "start_time")
     private Time startTime;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "end_time")
     private Time endTime;
 

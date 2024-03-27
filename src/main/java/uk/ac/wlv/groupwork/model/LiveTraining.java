@@ -22,9 +22,11 @@ public class LiveTraining {
     @Column(name = "date")
     private Date trainingDate;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "start_time")
     private Time startTime;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "end_time")
     private Time endTime;
 

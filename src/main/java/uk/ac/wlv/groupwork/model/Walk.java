@@ -23,6 +23,7 @@ public class Walk {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "start_time")
     private Time startTime;
 
