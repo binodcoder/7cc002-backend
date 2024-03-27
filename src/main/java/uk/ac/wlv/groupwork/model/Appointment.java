@@ -1,5 +1,7 @@
 package uk.ac.wlv.groupwork.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -18,6 +20,7 @@ public class Appointment {
     @Column(name = "user_id")
     private int userId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Column(name = "start_time")
