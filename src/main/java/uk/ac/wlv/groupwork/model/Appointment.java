@@ -1,6 +1,7 @@
 package uk.ac.wlv.groupwork.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -21,13 +22,16 @@ public class Appointment {
     private int userId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(notes = "The date of the appointment (YYYY-MM-DD)", example = "2024-04-04")
     private Date date;
 
     @JsonFormat(pattern = "HH:mm:ss")
+    @ApiModelProperty(notes = "The start time of the appointment (HH:mm:ss)", example = "12:15:30")
     @Column(name = "start_time")
     private Time startTime;
 
     @JsonFormat(pattern = "HH:mm:ss")
+    @ApiModelProperty(notes = "The end time of the appointment (HH:mm:ss)", example = "12:30:00")
     @Column(name = "end_time")
     private Time endTime;
 
