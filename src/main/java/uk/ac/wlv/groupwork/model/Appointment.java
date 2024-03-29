@@ -35,15 +35,19 @@ public class Appointment {
     @Column(name = "end_time")
     private Time endTime;
 
+    @Column(name = "remark")
+    private String remark;
+
     public Appointment() {
     }
 
-    public Appointment(int trainerId, int userId, Date date, Time startTime, Time endTime) {
+    public Appointment(int trainerId, int userId, Date date, Time startTime, Time endTime, String remark) {
         this.trainerId = trainerId;
         this.userId = userId;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.remark = remark;
     }
 
     public int getId() {
@@ -92,5 +96,13 @@ public class Appointment {
 
     public void setEndTime(Time endTime) {
         this.endTime = endTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
