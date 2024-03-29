@@ -1,6 +1,9 @@
 package uk.ac.wlv.groupwork.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -26,6 +29,10 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<WalkParticipant> participatedWalks;
+
     public User() {
     }
 
@@ -37,6 +44,18 @@ public class User {
         this.institutionEmail = institutionEmail;
         this.gender = gender;
         this.age = age;
+    }
+
+    public User(int id, String name, String email, String password, String institutionEmail, String gender, int age, Role role, List<WalkParticipant> participatedWalks) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.institutionEmail = institutionEmail;
+        this.gender = gender;
+        this.age = age;
+        this.role = role;
+        this.participatedWalks = participatedWalks;
     }
 
     public int getId() {
@@ -101,5 +120,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<WalkParticipant> getParticipatedWalks() {
+        return participatedWalks;
+    }
+
+    public void setParticipatedWalks(List<WalkParticipant> participatedWalks) {
+        this.participatedWalks = participatedWalks;
     }
 }

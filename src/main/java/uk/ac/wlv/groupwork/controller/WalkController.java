@@ -34,6 +34,12 @@ public class WalkController {
         }
     }
 
+    @GetMapping("/export")
+    public ResponseEntity<List<Walk>> getAllWalksWithParticipants() {
+        List<Walk> walks = walkService.getAllWalksWithParticipants();
+        return ResponseEntity.ok(walks);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getWalkById(@PathVariable int id) {
         Optional<Walk> walk = walkService.getWalkById(id);

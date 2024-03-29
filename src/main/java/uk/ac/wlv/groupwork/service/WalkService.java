@@ -12,6 +12,10 @@ public class WalkService {
 
     private final WalkRepository walkRepository;
 
+    public List<Walk> getAllWalksWithParticipants() {
+        return walkRepository.findAllWalksWithParticipants();
+    }
+
     public WalkService(WalkRepository walkRepository) {
         this.walkRepository = walkRepository;
     }

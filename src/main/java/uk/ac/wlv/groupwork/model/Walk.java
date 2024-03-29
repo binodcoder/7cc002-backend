@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "walks")
@@ -30,6 +31,9 @@ public class Walk {
     @Column(name = "start_location")
     private String startLocation;
 
+    @OneToMany(mappedBy = "walk")
+    private List<WalkParticipant> participants;
+
     public Walk() {
     }
 
@@ -40,6 +44,16 @@ public class Walk {
         this.date = date;
         this.startTime = startTime;
         this.startLocation = startLocation;
+    }
+
+    public Walk(int id, Integer proposerId, String routeData, Date date, Time startTime, String startLocation, List<WalkParticipant> participants) {
+        this.id = id;
+        this.proposerId = proposerId;
+        this.routeData = routeData;
+        this.date = date;
+        this.startTime = startTime;
+        this.startLocation = startLocation;
+        this.participants = participants;
     }
 
     public int getId() {
@@ -88,5 +102,13 @@ public class Walk {
 
     public void setStartLocation(String startLocation) {
         this.startLocation = startLocation;
+    }
+
+    public List<WalkParticipant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<WalkParticipant> participants) {
+        this.participants = participants;
     }
 }
