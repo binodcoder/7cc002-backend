@@ -34,7 +34,7 @@ public class WalkController {
         }
     }
 
-    @GetMapping("/export")
+    @GetMapping("/participants")
     public ResponseEntity<List<Walk>> getAllWalksWithParticipants() {
         List<Walk> walks = walkService.getAllWalksWithParticipants();
         return ResponseEntity.ok(walks);
