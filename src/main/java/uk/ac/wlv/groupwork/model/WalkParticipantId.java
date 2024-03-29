@@ -6,31 +6,31 @@ import java.io.Serializable;
 @Embeddable
 public class WalkParticipantId implements Serializable {
 
-    private Long userId;
+    private int userId;
 
-    private Long walkId;
+    private int walkId;
 
     public WalkParticipantId() {
     }
 
-    public WalkParticipantId(Long userId, Long walkId) {
+    public WalkParticipantId(int userId, int walkId) {
         this.userId = userId;
         this.walkId = walkId;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public Long getWalkId() {
+    public int getWalkId() {
         return walkId;
     }
 
-    public void setWalkId(Long walkId) {
+    public void setWalkId(int walkId) {
         this.walkId = walkId;
     }
 }

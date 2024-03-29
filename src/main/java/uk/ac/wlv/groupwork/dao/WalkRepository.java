@@ -8,7 +8,7 @@ import uk.ac.wlv.groupwork.model.Walk;
 import java.util.List;
 
 @Repository
-public interface WalkRepository extends JpaRepository<Walk, Integer> {
+public interface WalkRepository extends JpaRepository<Walk, Integer>, WalkRepositoryCustom {
 
     //SQL
     //@Query("SELECT w.*, u.* FROM walks w INNER JOIN walk_participants wp ON w.id = wp.walk_id INNER JOIN users u ON wp.user_id = u.id");

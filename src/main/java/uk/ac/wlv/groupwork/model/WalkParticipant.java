@@ -27,7 +27,6 @@ public class WalkParticipant {
     private Walk walk;
 
 
-
     public WalkParticipant() {
     }
 
@@ -35,6 +34,7 @@ public class WalkParticipant {
         this.user = user;
         this.walk = walk;
     }
+
 
     public User getUser() {
         return user;
@@ -51,4 +51,5 @@ public class WalkParticipant {
     public void setWalk(Walk walk) {
         this.walk = walk;
     }
+
 }
