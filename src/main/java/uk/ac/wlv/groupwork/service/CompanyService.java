@@ -24,6 +24,10 @@ public class CompanyService {
         return companyRepository.findById(id);
     }
 
+    public Optional<Company> getCompanyByEmail(String email){
+        return companyRepository.getCompanyByEmail(email);
+    }
+
     public Company addCompany(Company company) {
         return companyRepository.save(company);
     }
