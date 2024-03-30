@@ -24,6 +24,10 @@ public class WalkMediaService {
         return walkMediaRepository.findById(id);
     }
 
+    public Optional<WalkMedia> getWalkMediaByWalkId(int walkId) {
+        return walkMediaRepository.getWalkMediaByWalkId(walkId);
+    }
+
     public WalkMedia addWalkMedia(WalkMedia walkMedia) {
         return walkMediaRepository.save(walkMedia);
     }

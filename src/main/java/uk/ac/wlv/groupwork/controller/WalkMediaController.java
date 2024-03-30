@@ -45,6 +45,18 @@ public class WalkMediaController {
         }
     }
 
+    @GetMapping("/walk-id/{walkId}")
+    public ResponseEntity<Object> getWalkMediaByWalkId(@PathVariable int walkId) {
+        Optional<WalkMedia> walkMedia = walkMediaService.getWalkMediaByWalkId(walkId);
+        if (walkMedia.isPresent()) {
+            return ResponseEntity.ok(walkMedia.get());
+        } else {
+            Map<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("NOT FOUND", "Walk Media with Walk ID " + walkId + " not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Object> addWalkMedia(@RequestBody WalkMedia walkMedia) {
         WalkMedia addedWalkMedia = walkMediaService.addWalkMedia(walkMedia);
