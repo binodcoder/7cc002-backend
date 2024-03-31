@@ -24,7 +24,7 @@ public class WalkMediaService {
         return walkMediaRepository.findById(id);
     }
 
-    public Optional<WalkMedia> getWalkMediaByWalkId(int walkId) {
+    public List<WalkMedia> getWalkMediaByWalkId(int walkId) {
         return walkMediaRepository.getWalkMediaByWalkId(walkId);
     }
 
