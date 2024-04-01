@@ -37,7 +37,7 @@ public class WalkParticipantService {
 
         //Uses the custom method for this using native SQL.
         //This coud not be done with JPQL
-        walkRepository.addUserToWalk(user, walk);
+         walkRepository.addUserToWalk(user, walk);
 
         return "User joined the walk successfully";
     }

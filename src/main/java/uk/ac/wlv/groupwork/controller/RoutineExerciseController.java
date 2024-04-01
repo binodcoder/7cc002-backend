@@ -50,9 +50,12 @@ public class RoutineExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addRoutineExercise(@RequestBody RoutineExercise routineExercise) {
-        RoutineExercise addedRoutineExercise = routineExerciseService.addRoutineExercise(routineExercise);
-        return ResponseEntity.status(HttpStatus.CREATED).body(addedRoutineExercise);
+    public ResponseEntity<Object> addRoutineExercise(
+            @RequestParam("exercise_id") int exercise_id,
+            @RequestParam("routine_id") int routine_id) {
+        //RoutineExercise addedRoutineExercise = routineExerciseService.addRoutineExercise(routineExercise);
+        String result = routineExerciseService.addRoutineExercise(exercise_id, routine_id);
+        return ResponseEntity.ok(result);
     }
 
     @PutMapping("/{routineId}/{exerciseId}")
@@ -68,7 +71,7 @@ public class RoutineExerciseController {
         return ResponseEntity.ok(updatedRoutineExercise);
     }
 
-    @DeleteMapping("/{routineId}/{exerciseId}")
+    @DeleteMapping("/{routineId}/remove/{exerciseId}")
     public ResponseEntity<Object> deleteRoutineExerciseById(@PathVariable int routineId, @PathVariable int exerciseId) {
         RoutineExerciseId id = new RoutineExerciseId(routineId, exerciseId);
         if (!routineExerciseService.getRoutineExerciseById(id).isPresent()) {

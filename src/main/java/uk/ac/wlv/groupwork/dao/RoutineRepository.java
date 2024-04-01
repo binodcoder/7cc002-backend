@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import uk.ac.wlv.groupwork.model.Routine;
 
 @Repository
-public interface RoutineRepository extends JpaRepository<Routine, Integer> {
+public interface RoutineRepository extends JpaRepository<Routine, Integer>, RoutineRepositoryCustom {
 
 }
 

@@ -1,5 +1,8 @@
 package uk.ac.wlv.groupwork.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,11 +15,13 @@ public class RoutineExercise {
     @ManyToOne
     @MapsId("routineId")
     @JoinColumn(name = "routine_id")
+    @JsonIgnore
     private Routine routine;
 
     @ManyToOne
     @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id")
+    @JsonUnwrapped
     private Exercise exercise;
 
     public RoutineExercise() {

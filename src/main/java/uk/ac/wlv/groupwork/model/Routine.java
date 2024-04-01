@@ -1,6 +1,8 @@
 package uk.ac.wlv.groupwork.model;
 
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "routines")
@@ -22,6 +24,9 @@ public class Routine {
     @Enumerated(EnumType.STRING)
     private Source source;
 
+    @OneToMany(mappedBy = "routine")
+    private List<RoutineExercise> exercises;
+
     public Routine() {
     }
 
@@ -32,6 +37,16 @@ public class Routine {
         this.difficulty = difficulty;
         this.duration = duration;
         this.source = source;
+    }
+
+    public Routine(int id, String name, String description, Difficulty difficulty, int duration, Source source, List<RoutineExercise> exercises) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.difficulty = difficulty;
+        this.duration = duration;
+        this.source = source;
+        this.exercises = exercises;
     }
 
     public int getId() {
@@ -80,5 +95,13 @@ public class Routine {
 
     public void setSource(Source source) {
         this.source = source;
+    }
+
+    public List<RoutineExercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<RoutineExercise> exercises) {
+        this.exercises = exercises;
     }
 }

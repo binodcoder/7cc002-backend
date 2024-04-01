@@ -7,4 +7,5 @@ import uk.ac.wlv.groupwork.model.RoutineExerciseId;
 
 @Repository
 public interface RoutineExerciseRepository extends JpaRepository<RoutineExercise, RoutineExerciseId> {
+    void deleteByExerciseIdAndRoutineId(int exerciseId, int routineId);
 }
