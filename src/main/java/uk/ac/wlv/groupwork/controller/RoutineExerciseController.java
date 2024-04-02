@@ -1,6 +1,5 @@
 package uk.ac.wlv.groupwork.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,6 @@ public class RoutineExerciseController {
 
     private final RoutineExerciseService routineExerciseService;
 
-    @Autowired
     public RoutineExerciseController(RoutineExerciseService routineExerciseService) {
         this.routineExerciseService = routineExerciseService;
     }
@@ -56,19 +54,6 @@ public class RoutineExerciseController {
         //RoutineExercise addedRoutineExercise = routineExerciseService.addRoutineExercise(routineExercise);
         String result = routineExerciseService.addRoutineExercise(exercise_id, routine_id);
         return ResponseEntity.ok(result);
-    }
-
-    @PutMapping("/{routineId}/{exerciseId}")
-    public ResponseEntity<Object> updateRoutineExercise(@PathVariable int routineId, @PathVariable int exerciseId, @RequestBody RoutineExercise routineExercise) {
-        RoutineExerciseId id = new RoutineExerciseId(routineId, exerciseId);
-        if (!routineExerciseService.getRoutineExerciseById(id).isPresent()) {
-            Map<String, String> errorMessage = new HashMap<>();
-            errorMessage.put("NOT FOUND", "Routine Exercise with ID " + id + " not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-        }
-        routineExercise.setId(id);
-        RoutineExercise updatedRoutineExercise = routineExerciseService.updateRoutineExercise(routineExercise);
-        return ResponseEntity.ok(updatedRoutineExercise);
     }
 
     @DeleteMapping("/{routineId}/remove/{exerciseId}")

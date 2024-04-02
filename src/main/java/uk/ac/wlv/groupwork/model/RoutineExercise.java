@@ -27,19 +27,12 @@ public class RoutineExercise {
     public RoutineExercise() {
     }
 
-    public RoutineExercise(RoutineExerciseId id, Routine routine, Exercise exercise) {
-        this.id = id;
+    public RoutineExercise(Routine routine, Exercise exercise) {
         this.routine = routine;
         this.exercise = exercise;
     }
 
-    public RoutineExerciseId getId() {
-        return id;
-    }
 
-    public void setId(RoutineExerciseId id) {
-        this.id = id;
-    }
 
     public Routine getRoutine() {
         return routine;
