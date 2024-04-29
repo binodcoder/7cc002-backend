@@ -27,13 +27,15 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @Test
     public void testLogin() {
         String email = "sahan@bcas.lk";
         String password = "123";
-        String hashedPassword = "40bd001563085fc35165329ea1ff5c5ecbdbbeef";
+        String hashedPassword = PasswordEncoder.encode(password);
 
-        when(PasswordEncoder.encode(password)).thenReturn(hashedPassword);
 
         User mockUser = new User();
         mockUser.setEmail(email);
