@@ -85,34 +85,34 @@ public class UserServiceTest {
         assertEquals(mockUser, result.orElse(null));
     }
 
-//
-//    @Test
-//    public void testAddUser() {
-//        User user = new User();
-//        when(userRepository.save(user)).thenReturn(user);
-//
-//        User result = userService.addUser(user);
-//
-//        assertEquals(user, result);
-//    }
-//
-//    @Test
-//    public void testUpdateUser() {
-//        User user = new User();
-//        when(userRepository.save(user)).thenReturn(user);
-//
-//        User result = userService.updateUser(user);
-//
-//        assertEquals(user, result);
-//    }
-//
-//    @Test
-//    public void testDeleteUserById() {
-//        int userId = 1;
-//
-//        userService.deleteUserById(userId);
-//
-//        verify(userRepository, times(1)).deleteById(userId);
-//    }
+
+    @Test
+    public void testAddUser() {
+        User user = new User();
+        when(userRepository.save(user)).thenReturn(user);
+
+        User result = userService.addUser(user);
+
+        assertEquals(user, result);
+    }
+
+    @Test
+    public void testUpdateUser() {
+        User user = new User();
+        when(userRepository.save(user)).thenReturn(user);
+
+        User result = userService.updateUser(user);
+
+        assertEquals(user, result);
+    }
+
+    @Test
+    public void testDeleteUserById() {
+        int userId = 1;
+
+        userService.deleteUserById(userId);
+
+        verify(userRepository, times(1)).deleteById(userId);
+    }
 
 }
